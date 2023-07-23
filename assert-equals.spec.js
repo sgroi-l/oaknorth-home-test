@@ -53,7 +53,7 @@ describe("assertEquals", () => {
           { name: "laurie", age: 31 },
           { name: "laurie", age: 31, height: 182 }
         )
-      ).toThrow(`Found unexpected key [height] in object`);
+      ).toThrow(`Expected keys [name,age], but found keys [name,age,height]`);
     });
   });
 
@@ -61,9 +61,7 @@ describe("assertEquals", () => {
     it("throws an error", () => {
       expect(() =>
         assertEquals({ name: "laurie", age: 31 }, { name: "laurie", age: 30 })
-      ).toThrow(
-        `Expected same values, but found different values for key [age]`
-      );
+      ).toThrow(`Expected 'age: 31', but found 'age: 30'`);
     });
   });
 
