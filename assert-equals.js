@@ -1,4 +1,8 @@
 function assertEquals(expect, actual) {
+  if (arguments.length < 2) {
+    throw new Error("Expect at least two arguments: expect and actual");
+  }
+
   const expectedType = Array.isArray(expect) ? "array" : typeof expect;
   const actualType = Array.isArray(actual) ? "array" : typeof actual;
 
