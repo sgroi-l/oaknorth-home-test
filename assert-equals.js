@@ -30,7 +30,7 @@ function assertEquals(expect, actual) {
   }
 }
 
-function compareArrays(expect, actual, visitedObjects = new Set()) {
+function compareArrays(expect, actual) {
   if (expect.length !== actual.length) {
     throw new Error(
       `Expected array length ${expect.length}, but found ${actual.length}`
@@ -40,7 +40,7 @@ function compareArrays(expect, actual, visitedObjects = new Set()) {
   for (let i = 0; i < expect.length; i++) {
     if (typeof expect[i] === "object" && typeof actual[i] === "object") {
       // For array elements that are objects, perform a recursive comparison
-      compareObjects(expect[i], actual[i], visitedObjects);
+      compareObjects(expect[i], actual[i]);
     } else if (expect[i] !== actual[i]) {
       throw new Error(`Expected "${expect[i]}" but found "${actual[i]}"`);
     }
