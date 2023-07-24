@@ -1,6 +1,18 @@
 const assertEquals = require("./assert-equals");
 
 describe("assertEquals", () => {
+  describe("when the number of arguments is less than two", () => {
+    it("throws an error when no arguments are given", () => {
+      expect(() => assertEquals()).toThrow(
+        `Expect at least two arguments: expect and actual`
+      );
+    });
+    it("throws an error when only one argument is given", () => {
+      expect(() => assertEquals("Hello")).toThrow(
+        `Expect at least two arguments: expect and actual`
+      );
+    });
+  });
   describe("when expected and actual are strings", () => {
     it("returns without throwing an error when strings match", () => {
       expect(() => assertEquals("abc", "abc")).not.toThrow();
