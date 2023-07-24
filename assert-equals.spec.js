@@ -7,6 +7,7 @@ describe("assertEquals", () => {
         `Expect at least two arguments: expect and actual`
       );
     });
+
     it("throws an error when only one argument is given", () => {
       expect(() => assertEquals("Hello")).toThrow(
         `Expect at least two arguments: expect and actual`
@@ -17,6 +18,7 @@ describe("assertEquals", () => {
     it("returns without throwing an error when strings match", () => {
       expect(() => assertEquals("abc", "abc")).not.toThrow();
     });
+
     it("throws an error when strings don't match", () => {
       expect(() => assertEquals("abc", "abcd")).toThrow(
         `Expected "abc" but found "abcd"`
@@ -28,6 +30,7 @@ describe("assertEquals", () => {
     it("throws an error when numbers are different", () => {
       expect(() => assertEquals(1, 2)).toThrow(`Expected 1 but found 2`);
     });
+
     it("returns without throwing an error when numbers match", () => {
       expect(() => assertEquals(30, 30)).not.toThrow();
     });
@@ -52,6 +55,21 @@ describe("assertEquals", () => {
       expect(() => assertEquals(["a", "b"], ["a", "d"])).toThrow(
         `Expected "b" but found "d"`
       );
+    });
+
+    it("throws an error when expected and actual are arrays with different types inside", () => {
+      expect(() =>
+        assertEquals(["a", { name: "Laurie" }], ["a", 31])
+      ).toThrow();
+    });
+
+    it("returns without throwing an error when accessing nested objects in arrays", () => {
+      expect(() =>
+        assertEquals(
+          [{ name: "laurie", age: { now: 31 } }],
+          [{ name: "laurie", age: { now: 31 } }]
+        )
+      ).not.toThrow();
     });
   });
 
@@ -91,5 +109,11 @@ describe("assertEquals", () => {
         )
       ).not.toThrow();
     });
+  });
+
+  describe("when expected and actual are circular objects", () => {
+    it.todo("throws an error when objects have circular references");
+    it.todo("throws an error when nested objects have circular references");
+    it.todo("throws an error when nested arrays have circular references");
   });
 });
